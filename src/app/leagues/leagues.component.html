@@ -1,0 +1,27 @@
+<mat-form-field>
+  <mat-label>Select league</mat-label>
+  <mat-select >
+    <mat-option class = "option" *ngFor="let league of leagues" [value]="league.value" >
+      {{league.viewValue}}
+
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<p>
+    Average prices of players on individual positions
+</p>
+
+<div>
+    <div  style="height:400px;width:1200px;" class = "chart" >
+      <canvas baseChart #baseChart="base-chart"
+
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
