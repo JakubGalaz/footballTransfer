@@ -1,6 +1,37 @@
-
+<!DOCTYPE html>
+<html>
 <body>
 <div class="start">
   Jakub Gałązka & Wojciech Gołąbek presents Football Transfers
 </div>
+
+<mat-chip-list aria-label="Fish selection" >
+
+  <mat-chip color="primary" selected class="menu" (click)="choseOption(1)" >Classification</mat-chip>
+  <mat-chip color="accent" selected class="menu" (click)="choseOption(2)" >Leagues</mat-chip>
+  <mat-chip color="warn" selected class="menu" (click)="choseOption(1)" >Correlations </mat-chip>
+
+
+</mat-chip-list>
+
+
+
+<div *ngIf="menuOption===2;then leagues"></div>
+<div *ngIf="menuOption===1;then rankings"></div>
+
+<ng-template #leagues>
+
+  <app-leagues> </app-leagues>
+
+  </ng-template>
+
+  <ng-template #rankings>
+
+    <app-rankings> </app-rankings>
+
+    </ng-template>
+
+
+
 </body>
+</html>

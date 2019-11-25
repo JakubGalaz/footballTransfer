@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 body{
   background-image: url("/assets/footballBackgraund.jpg");
 
@@ -8,6 +10,7 @@ body{
 .start{
   font-size: 40px;
   color: white;
+  align-content: center;
 
 
 }

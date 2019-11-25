@@ -30,4 +30,9 @@ export class AppComponent {
 
 }
 
+choseOption(i) {
+  this.menuOption = i;
+
+ }
+
 }
