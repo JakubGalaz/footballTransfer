@@ -1,3 +1,6 @@
+<body>
+
+
 <mat-form-field>
   <mat-label>Select league</mat-label>
   <mat-select >
@@ -13,7 +16,7 @@
     Average prices of players on individual positions
 </p>
 
-<div>
+
     <div  style="height:400px;width:1200px;" class = "chart" >
       <canvas baseChart #baseChart="base-chart"
 
@@ -24,4 +27,77 @@
               [chartType]="barChartType">
       </canvas>
     </div>
-  </div>
+
+
+<!--
+    <div  style="position: relative;top: 170px;">
+
+      <p>
+        Total players in individual positions
+
+      </p>
+      <div>
+        <div>
+          <div style="display: block">
+            <canvas baseChart
+              [data]="polarAreaChartData"
+              [labels]="polarAreaChartLabels"
+              [legend]="polarAreaLegend"
+              [chartType]="polarAreaChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+
+
+      </div>
+
+    -->
+
+
+
+
+      <!--
+
+      <div style="position: relative;top: 190px;">
+        <p>
+          Table of players
+        </p>
+      <table matSort (matSortChange)="sortData($event)" width="400">
+        <tr>
+          <th mat-sort-header="Name">Name</th>
+          <th mat-sort-header="Position">Position</th>
+          <th mat-sort-header="Age">Age</th>
+          <th mat-sort-header="Team_from">Team from </th>
+          <th mat-sort-header="League_from">League from</th>
+          <th mat-sort-header="Team_to">Taeam to</th>
+          <th mat-sort-header="Season">Season</th>
+          <th mat-sort-header="Market_value">Market value</th>
+          <th mat-sort-header="Transfer_fee">Transfer fee</th>
+
+
+        </tr>
+
+        <tr *ngFor="let players of laLigaList">
+          <td>{{players.Name}}</td>
+          <td>{{players.Position}}</td>
+          <td>{{players.Age}}</td>
+          <td>{{players.Team_from}}</td>
+          <td>{{players.League_from}}</td>
+          <td>{{players.Team_to}}</td>
+          <td>{{players.Season}}</td>
+          <td>{{players.Market_value}}</td>
+          <td>{{players.Transfer_fee}}</td>
+
+
+
+
+        </tr>
+      </table>
+    </div>
+  -->
+      </body>
+
+
+

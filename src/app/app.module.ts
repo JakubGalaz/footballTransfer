@@ -13,6 +13,8 @@ import {Sort} from '@angular/material/sort';
 import {MatSelectModule} from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { ChartsModule } from 'ng2-charts';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { TotalComponent } from './total/total.component';
 
 //import {MatSelectModule} from '@angular/material/select';
 //import { MatSliderModule } from '@angular/material/slider';
@@ -24,6 +26,8 @@ import { ChartsModule } from 'ng2-charts';
     AppComponent,
     LeaguesComponent,
     RankingsComponent,
+    LineChartComponent,
+    TotalComponent,
 
 
 

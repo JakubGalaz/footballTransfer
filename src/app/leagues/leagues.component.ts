@@ -45,26 +45,19 @@ export class LeaguesComponent implements OnInit {
 
       }
 
-
-
-
-
-
     }
 
     this.barChartData.push({ data: [this.LaLigaAVG('Right Winger')],
       label:'Right Winger'});
-
     this.barChartData.push({ data: [this.LaLigaAVG('Left Winger')],
     label: 'Left Winger'});
-
     this.barChartData.push({ data: [this.LaLigaAVG('Centre-Forward')],
     label: 'Centre-Forward'});
     this.barChartData.push({ data: [this.LaLigaAVG('Centre-Back')],
     label: 'Centre-Back'});
     this.barChartData.push({ data: [this.LaLigaAVG('Central Midfield')],
     label: 'Central Midfield'});
-    this.barChartData.push({ data: [this.LaLigaAVG('LAttacking Midfield')],
+    this.barChartData.push({ data: [this.LaLigaAVG('Attacking Midfield')],
     label: 'Attacking Midfield'});
     this.barChartData.push({ data: [this.LaLigaAVG('Defensive Midfield')],
     label: 'Defensive Midfield'});
@@ -85,9 +78,6 @@ export class LeaguesComponent implements OnInit {
 
 
   constructor(public http: HttpClient, public transferService: TransferServiceService) {
-
-
-
 
 
   }
@@ -114,7 +104,7 @@ export class LeaguesComponent implements OnInit {
 
 
     // tslint:disable-next-line: member-ordering
-    public labels: Array<any> = ['Województwa'];
+    public labels: Array<any> = ['Position'];
 
     // tslint:disable-next-line: member-ordering
     public colors: Array<any> = [
@@ -179,6 +169,10 @@ console.log(avg);
 return avg;
 
     }
+
+
+
+
 
 
 }
