@@ -4,7 +4,7 @@ import { TransferServiceService } from '../transfer-service.service';
 import {TransferRecord} from './../transferRecord';
 import { parse } from 'querystring';
 import { FormControl } from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts/lib/base-chart.directive';
+import { BaseChartDirective, Label } from 'ng2-charts/lib/base-chart.directive';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 
 export interface League{
@@ -23,6 +23,15 @@ export class LeaguesComponent implements OnInit {
   @ViewChild('baseChart',   {static: false} ) chart: BaseChartDirective
 
   laLigaList: TransferRecord[] = [];
+
+  topPlayers: TransferRecord[] = [];
+
+
+
+  public lineChartLabels: Label[] = ['2000-2001', '2001-2002', '2002-2003', '2003-2004',
+  '2004-2005', '2005-2006', '2006-2007', '2007-2008', '2008-2009', '2009-2010',
+'2010-2011', '2011-2012', '2012-2013', '2013-2014', '2014-2015', '2015-2016',
+'2016-2017', '2017-2018', '2018-2019'];
 
   leagues: League[] = [
   {value: 'LaLiga', viewValue: 'La Liga'},

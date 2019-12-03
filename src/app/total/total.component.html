@@ -1,0 +1,106 @@
+<body style="background-repeat: repeat;">
+
+  <p>
+      Average prices of players on individual positions
+  </p>
+
+  <!-- #baseChart="base-chart" -->
+      <div  style="height:600px;width:1700px;" class = "chart" >
+        <canvas baseChart
+
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+
+
+
+<div style="padding-top:340px;">
+
+  <p>
+    Average prices of players over the years
+</p>
+      <div class="flex-item" style="height:400px;width:1900px;" >
+        <div style="display: block;">
+        <canvas baseChart
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+  <div style="padding-top:740px;">
+    <p>
+      Total positions
+  </p>
+  <div>
+    <div>
+      <div style="display: block">
+        <canvas baseChart
+          [data]="polarAreaChartData"
+          [labels]="polarAreaChartLabels"
+          [legend]="polarAreaLegend"
+          [chartType]="polarAreaChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div>
+  <p>
+   The most expensive transfers
+</p>
+
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Age</th>
+      <th scope="col">Team from</th>
+      <th scope="col">League from</th>
+      <th scope="col">Team to</th>
+      <th scope="col">League to</th>
+      <th scope="col">Season</th>
+      <th scope="col">Market value</th>
+      <th scope="col">Transfer fee</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of topPlayers; let i = index">
+      <th scope="row">{{i}}</th>
+      <td>{{player.Name}}</td>
+      <td>{{player.Position}}</td>
+      <td>{{player.Age}}</td>
+      <td>{{player.Team_from}}</td>
+      <td>{{player.League_from}}</td>
+      <td>{{player.Team_to}}</td>
+      <td>{{player.League_to}}</td>
+      <td>{{player.Season}}</td>
+      <td>{{player.Market_value}}</td>
+      <td>{{player.Transfer_fee}}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+    </body>
