@@ -8,8 +8,8 @@ html {
 body{
   background-image: url("/assets/footballBackgraund.jpg");
 min-height: 1080px;
-background-repeat:repeat-y;
-
+background-repeat: no-repeat;
+  background-attachment: fixed;
 
 
 
