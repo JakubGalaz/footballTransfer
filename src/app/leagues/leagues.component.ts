@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TransferServiceService } from '../transfer-service.service';
 import {TransferRecord} from './../transferRecord';
@@ -20,9 +20,10 @@ export interface League{
   styleUrls: ['./leagues.component.css']
 })
 
-export class LeaguesComponent implements OnInit {
+export class LeaguesComponent implements OnInit, OnChanges{
 
   @ViewChild('baseChart',   {static: false} ) chart: BaseChartDirective
+  @ViewChild('polarChart',   {static: false} ) polarChart: BaseChartDirective
 
   laLigaList: TransferRecord[] = [];
 
@@ -42,7 +43,7 @@ export class LeaguesComponent implements OnInit {
   {value: 'SerieA', viewValue: 'Serie A'},
   {value: 'Ligue1', viewValue: 'Ligue 1'},
   {value: 'PremierLeague', viewValue: 'Premier League'},
-  {value: 'BundesLiga', viewValue: 'BundesLiga'},
+  {value: 'BundesLiga', viewValue: 'Bundes Liga'},
   ]
 
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
@@ -102,13 +103,19 @@ export class LeaguesComponent implements OnInit {
 
 
   public polarAreaChartLabels: Label[] = ['Right Winger', 'Left Winger', 'Centre-Forward', 'Centre-Back', 'Central Midfield',
-    'Attacking Midfield', 'Defensive Midfield', 'Defensive Midfield', 'Second Striker', 'Goalkeeper',
+    'Attacking Midfield', 'Defensive Midfield', 'Second Striker', 'Goalkeeper',
     'Right-Back', 'Left-Back', 'Right Midfield', 'Left Midfield'
   ];
   public polarAreaChartData: SingleDataSet = [];
   public polarAreaLegend = true;
 
   public polarAreaChartType: ChartType = 'polarArea';
+  public selected2 = this.leagues[0].value;
+
+  ngOnChanges() {
+   // console.log('Zmianaaa!!!' + this.selected2);
+    this.selectOption();
+  }
 
   ngOnInit(): void {
 
@@ -122,109 +129,11 @@ export class LeaguesComponent implements OnInit {
 
     }
 
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Right Winger')],
-      label: 'Right Winger'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Left Winger')],
-      label: 'Left Winger'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Centre-Forward')],
-      label: 'Centre-Forward'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Centre-Back')],
-      label: 'Centre-Back'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Central Midfield')],
-      label: 'Central Midfield'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Attacking Midfield')],
-      label: 'Attacking Midfield'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Defensive Midfield')],
-      label: 'Defensive Midfield'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Second Striker')],
-      label: 'Second Striker'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Goalkeeper')],
-      label: 'Goalkeeper'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Right-Back')],
-      label: 'Right-Back'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Left-Back')],
-      label: 'Left-Back'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Right Midfield')],
-      label: 'Right Midfield'
-    });
-    this.barChartData.push({
-      data: [this.LaLigaAVG('Left Midfield')],
-      label: 'Left Midfield'
-    });
+    console.log(this.laLigaList);
+
+    this.initiation();
 
 
-    this.polarAreaChartData.push(this.sumPosition('Right Winger', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Left Winger', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Centre-Forward', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Centre-Back', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Central Midfield', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Attacking Midfield', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Defensive Midfield', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Second Striker', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Goalkeeper', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Left-Back', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Right Midfield', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Left Winger', this.laLigaList));
-    this.polarAreaChartData.push(this.sumPosition('Left Midfield', this.laLigaList));
-
-
-    this.lineChartData.push({
-      data: [
-        this.avgSeason('2000-2001', this.laLigaList),
-        this.avgSeason('2001-2002', this.laLigaList),
-        this.avgSeason('2002-2003', this.laLigaList),
-        this.avgSeason('2003-2004', this.laLigaList),
-        this.avgSeason('2004-2005', this.laLigaList),
-        this.avgSeason('2005-2006', this.laLigaList),
-        this.avgSeason('2006-2007', this.laLigaList),
-        this.avgSeason('2007-2008', this.laLigaList),
-        this.avgSeason('2008-2009', this.laLigaList),
-        this.avgSeason('2009-2010', this.laLigaList),
-        this.avgSeason('2010-2011', this.laLigaList),
-        this.avgSeason('2011-2012', this.laLigaList),
-        this.avgSeason('2012-2013', this.laLigaList),
-        this.avgSeason('2013-2014', this.laLigaList),
-        this.avgSeason('2014-2015', this.laLigaList),
-        this.avgSeason('2015-2016', this.laLigaList),
-        this.avgSeason('2016-2017', this.laLigaList),
-        this.avgSeason('2017-2018', this.laLigaList),
-        this.avgSeason('2018-2019', this.laLigaList),
-
-
-      ], label: 'Average'
-    })
-
-
-    this.sortPlayers = this.laLigaList.sort((a, b) => (a.Transfer_fee < b.Transfer_fee) ? 1 : -1);
-
-    for (var i = 0; i < 25; i++) {
-      this.topPlayers.push(this.sortPlayers[i]);
-
-
-    }
   }
 
 
@@ -326,7 +235,7 @@ counter = counter +1;
 
 var avg = sum/counter;
 
-console.log(avg);
+
 
 return avg;
 
@@ -370,6 +279,276 @@ public avgSeason(season: string, playersArray: TransferRecord[]){
 
 }
 
+
+public selectOption()
+{
+  console.log('Wywołano selectOption: ' + this.selected2)
+
+  for(var i = 0; i < 525; i++)
+  {
+    this.barChartData.pop();
+  }
+
+  for(var i = 0; i < 14; i++)
+  {
+    this.polarAreaChartData.pop();
+    console.log('pop polarChartDAta')
+  }
+
+  for(var i = 0; i < 525; i++)
+  {
+    this.lineChartData.pop();
+  }
+
+
+
+  this.chart.colors = [ {
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+
+    ],
+    borderColor: [
+      'rgba(255,99,132,1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 2,
+  }];
+
+this.lineChartColors = [
+
+  { // red
+    backgroundColor: 'rgba(255,0,0,0.3)',
+    borderColor: 'red',
+    pointBackgroundColor: 'rgba(148,159,177,1)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+  }
+];
+
+  for (var i = 0; i < 25; i++) {
+    this.topPlayers.pop()
+  }
+
+
+
+  switch(this.selected2){
+
+
+    case'BundesLiga':
+    {
+
+      console.log('Wybrano bundeslige');
+      var a = 0;
+      for (var i = 0; i < this.transferService.sortedData.length; i++) {
+        if (this.transferService.sortedData[i].League_to === '1.Bundesliga') {
+          this.laLigaList[a] = this.transferService.sortedData[i];
+          a++;
+
+        }
+
+      }
+
+      this.initiation();
+      break;
+
+    }    case'SerieA':
+    {
+
+      console.log('Wybrano serieA');
+      var a = 0;
+      for (var i = 0; i < this.transferService.sortedData.length; i++) {
+        if (this.transferService.sortedData[i].League_to === 'Serie A') {
+          this.laLigaList[a] = this.transferService.sortedData[i];
+          a++;
+
+        }
+
+      }
+
+      this.initiation();
+      break;
+
+    }    case'Ligue1':
+    {
+
+      console.log('Wybrano Ligue 1');
+      var a = 0;
+      for (var i = 0; i < this.transferService.sortedData.length; i++) {
+        if (this.transferService.sortedData[i].League_to === 'Ligue 1') {
+          this.laLigaList[a] = this.transferService.sortedData[i];
+          a++;
+
+        }
+
+      }
+
+      this.initiation();
+      break;
+
+    }    case'PremierLeague':
+    {
+
+
+      var a = 0;
+      for (var i = 0; i < this.transferService.sortedData.length; i++) {
+        if (this.transferService.sortedData[i].League_to === 'Premier League') {
+          this.laLigaList[a] = this.transferService.sortedData[i];
+          a++;
+
+        }
+
+      }
+
+      this.initiation();
+      break;
+
+    }
+    case'LaLiga':
+    {
+
+
+
+
+      var a = 0;
+      for (var i = 0; i < this.transferService.sortedData.length; i++) {
+        if (this.transferService.sortedData[i].League_to === 'LaLiga') {
+          this.laLigaList[a] = this.transferService.sortedData[i];
+          a++;
+
+        }
+
+      }
+
+      this.initiation();
+
+      break;
+
+    }
+
+
+
+
+
+  }
+
+
+}
+
+public initiation(){
+
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Right Winger')],
+    label: 'Right Winger'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Left Winger')],
+    label: 'Left Winger'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Centre-Forward')],
+    label: 'Centre-Forward'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Centre-Back')],
+    label: 'Centre-Back'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Central Midfield')],
+    label: 'Central Midfield'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Attacking Midfield')],
+    label: 'Attacking Midfield'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Defensive Midfield')],
+    label: 'Defensive Midfield'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Second Striker')],
+    label: 'Second Striker'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Goalkeeper')],
+    label: 'Goalkeeper'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Right-Back')],
+    label: 'Right-Back'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Left-Back')],
+    label: 'Left-Back'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Right Midfield')],
+    label: 'Right Midfield'
+  });
+  this.barChartData.push({
+    data: [this.LaLigaAVG('Left Midfield')],
+    label: 'Left Midfield'
+  });
+
+
+  this.polarAreaChartData.push(this.sumPosition('Right Winger', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Left Winger', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Centre-Forward', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Centre-Back', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Central Midfield', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Attacking Midfield', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Defensive Midfield', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Second Striker', this.laLigaList));
+
+  this.polarAreaChartData.push(this.sumPosition('Goalkeeper', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Left-Back', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Right Midfield', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Left Winger', this.laLigaList));
+  this.polarAreaChartData.push(this.sumPosition('Left Midfield', this.laLigaList))
+
+
+
+  this.lineChartData.push({
+    data: [
+      this.avgSeason('2000-2001', this.laLigaList),
+      this.avgSeason('2001-2002', this.laLigaList),
+      this.avgSeason('2002-2003', this.laLigaList),
+      this.avgSeason('2003-2004', this.laLigaList),
+      this.avgSeason('2004-2005', this.laLigaList),
+      this.avgSeason('2005-2006', this.laLigaList),
+      this.avgSeason('2006-2007', this.laLigaList),
+      this.avgSeason('2007-2008', this.laLigaList),
+      this.avgSeason('2008-2009', this.laLigaList),
+      this.avgSeason('2009-2010', this.laLigaList),
+      this.avgSeason('2010-2011', this.laLigaList),
+      this.avgSeason('2011-2012', this.laLigaList),
+      this.avgSeason('2012-2013', this.laLigaList),
+      this.avgSeason('2013-2014', this.laLigaList),
+      this.avgSeason('2014-2015', this.laLigaList),
+      this.avgSeason('2015-2016', this.laLigaList),
+      this.avgSeason('2016-2017', this.laLigaList),
+      this.avgSeason('2017-2018', this.laLigaList),
+      this.avgSeason('2018-2019', this.laLigaList),
+
+
+    ], label: 'Average'
+  })
+
+
+  this.sortPlayers = this.laLigaList.sort((a, b) => (a.Transfer_fee < b.Transfer_fee) ? 1 : -1);
+
+  for (var i = 0; i < 25; i++) {
+    this.topPlayers.push(this.sortPlayers[i]);
+
+
+  }
+
+}
 
 
 

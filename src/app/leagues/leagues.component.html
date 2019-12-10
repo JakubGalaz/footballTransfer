@@ -1,10 +1,10 @@
 <body>
 
-<div>
-<mat-form-field>
+<div  >
+<mat-form-field   >
   <mat-label>Select league</mat-label>
-  <mat-select >
-    <mat-option class = "option" *ngFor="let league of leagues" [value]="league.value" >
+  <mat-select  [(ngModel)]="selected2">
+    <mat-option class = "option" *ngFor="let league of leagues" [value]="league.value"  (click)="selectOption()">
       {{league.viewValue}}
 
     </mat-option>
@@ -22,7 +22,7 @@
 </p>
 
 
-    <div  style="height:400px;width:1200px;" class = "chart" >
+    <div  style="height:550px;width:1800px;" class = "chart" >
       <canvas baseChart #baseChart="base-chart"
 
               [datasets]="barChartData"
@@ -34,14 +34,14 @@
     </div>
 
 
-<div style="padding-top:740px;">
+<div style="padding-top:440px;">
   <p>
     Total positions
   </p>
   <div>
     <div>
       <div style="display: block">
-        <canvas baseChart
+        <canvas baseChart #polarChart="base-chart"
                 [data]="polarAreaChartData"
                 [labels]="polarAreaChartLabels"
                 [legend]="polarAreaLegend"
@@ -59,9 +59,9 @@
   <p>
     Average prices of players over the years
   </p>
-  <div class="flex-item" style="height:400px;width:1900px;" >
+  <div class="flex-item" style="height:370px;width:1900px;" >
     <div style="display: block;">
-      <canvas baseChart
+      <canvas baseChart #baseChart="base-chart"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
               [options]="lineChartOptions"
@@ -83,7 +83,7 @@
 
 
 
-  <table class="table">
+  <table class="table"  >
     <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -101,7 +101,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let player of topPlayers; let i = index">
-      <th scope="row">{{i}}</th>
+      <th scope="row">{{i+1}}</th>
       <td>{{player.Name}}</td>
       <td>{{player.Position}}</td>
       <td>{{player.Age}}</td>
@@ -116,6 +116,8 @@
     </tbody>
   </table>
 </div>
+
+
 
 
       </body>

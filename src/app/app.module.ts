@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { TotalComponent } from './total/total.component';
 
+
 //import {MatSelectModule} from '@angular/material/select';
 //import { MatSliderModule } from '@angular/material/slider';
 
@@ -28,6 +29,7 @@ import { TotalComponent } from './total/total.component';
     RankingsComponent,
     LineChartComponent,
     TotalComponent,
+
 
 
 
