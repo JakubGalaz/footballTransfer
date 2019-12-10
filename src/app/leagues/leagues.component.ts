@@ -112,6 +112,11 @@ export class LeaguesComponent implements OnInit, OnChanges{
   public polarAreaChartType: ChartType = 'polarArea';
   public selected2 = this.leagues[0].value;
 
+  public barChartDataAll: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Average' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Median' }
+  ];
+
   ngOnChanges() {
    // console.log('Zmianaaa!!!' + this.selected2);
     this.selectOption();

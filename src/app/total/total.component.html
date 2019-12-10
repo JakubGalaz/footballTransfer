@@ -117,8 +117,23 @@
     </canvas>
   </div>
 
+  <p>
+    Median transfer fee vs average transfer fee
+  </p>
 
 
+  <div>
+    <div>
+      <div>
+        <div style="display: block">
+          <canvas baseChart [datasets]="barChartDataAll" [labels]="barChartLabelsAll" [options]="barChartOptions"
+                  [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
 

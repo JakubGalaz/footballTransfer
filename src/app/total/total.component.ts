@@ -152,6 +152,12 @@ export class TotalComponent implements OnInit {
 
   public polarAreaChartType: ChartType = 'polarArea';
 
+  public barChartLabelsAll: Label[] = ['Right Winger', 'Left Winger', 'Centre-Forward', 'Centre-Back', 'Central Midfield',
+    'Attacking Midfield', 'Defensive Midfield', 'Second Striker', 'Goalkeeper',
+    'Right-Back', 'Left-Back', 'Right Midfield', 'Left Midfield'];
+
+  public barChartDataAll: ChartDataSets[];
+
 
   constructor(public http: HttpClient, public transferService: TransferServiceService) {
     var data = [[27,60000000],[25,56810000]];
@@ -167,6 +173,7 @@ export class TotalComponent implements OnInit {
 
 
     const result = regression.linear(data);
+    console.log(result);
 
     this.sortPlayers = this.transferService.sortedData.sort((a, b) => (a.Transfer_fee < b.Transfer_fee) ? 1 : -1);
 
@@ -237,6 +244,8 @@ export class TotalComponent implements OnInit {
 
 
 
+
+
     this.polarAreaChartData.push(this.sumPosition('Right Winger'));
     this.polarAreaChartData.push(this.sumPosition('Left Winger'));
     this.polarAreaChartData.push(this.sumPosition('Centre-Forward'));
@@ -250,6 +259,41 @@ export class TotalComponent implements OnInit {
     this.polarAreaChartData.push(this.sumPosition('Right Midfield'));
     this.polarAreaChartData.push(this.sumPosition('Left Winger'));
     this.polarAreaChartData.push(this.sumPosition('Left Midfield'));
+
+    this.barChartDataAll = [
+      { data: [
+        this.AVGPosition('Right Winger'),
+          this.AVGPosition('Left Winger'),
+          this.AVGPosition('Centre-Forward'),
+          this.AVGPosition('Centre-Back'),
+          this.AVGPosition('Central Midfield'),
+          this.AVGPosition('Attacking Midfield'),
+          this.AVGPosition('Defensive Midfield'),
+          this.AVGPosition('Second Striker'),
+          this.AVGPosition('Goalkeeper'),
+          this.AVGPosition('Left-Back'),
+          this.AVGPosition('Right Midfield'),
+          this.AVGPosition('Left Winger'),
+          this.AVGPosition('Left Midfield'),
+
+          ], label: 'Average' },
+      { data: [
+          this.medianCost('Right Winger'),
+          this.medianCost('Left Winger'),
+          this.medianCost('Centre-Forward'),
+          this.medianCost('Centre-Back'),
+          this.medianCost('Central Midfield'),
+          this.medianCost('Attacking Midfield'),
+          this.medianCost('Defensive Midfield'),
+          this.medianCost('Second Striker'),
+          this.medianCost('Goalkeeper'),
+          this.medianCost('Left-Back'),
+          this.medianCost('Right Midfield'),
+          this.medianCost('Left Winger'),
+          this.medianCost('Left Midfield'),
+        ], label: 'Median' }
+    ];
+
 
 
 
@@ -463,15 +507,13 @@ export class TotalComponent implements OnInit {
           if(sortedPositionList.length%2 === 0){
 
           let firstIndex: number =  sortedPositionList.length/2 ;
-            console.log('To jest index parzysty: ' + firstIndex);
 
-            console.log('To jest liczba elementow parzystej: ' + sortedPositionList.length)
 
           median = (sortedPositionList[firstIndex].Transfer_fee + sortedPositionList[firstIndex+1].Transfer_fee)/2
           }
           else{
             let index: number = sortedPositionList.length / 2;
-            console.log('To jest index nieparzysty: ' + index)
+
             median = sortedPositionList[index+0.5].Transfer_fee;
           }
 
