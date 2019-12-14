@@ -1,1 +1,64 @@
-<p>rankings works!</p>
+
+<body>
+
+<highcharts-chart
+  [Highcharts]="Highcharts"
+  [options]="chartOptions"
+
+  style="width: 1920px; height: 800px; display: block;"
+></highcharts-chart>
+
+
+<p>
+  Average prices of players on individual positions
+</p>
+
+
+<div  style="height:600px;width:1700px;" class = "chart" >
+  <canvas baseChart
+
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>
+
+
+<div style="padding-top:360px;">
+
+  <p>
+    Sum prices of players age
+  </p>
+
+  <div  style="height:600px;width:1700px;" class = "chart" >
+  <canvas baseChart
+
+          [datasets]="barChartDataLeagueFrom"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>
+</div>
+<div style="padding-top:360px;">
+<p>
+  Average prices of players on individual positions
+</p>
+
+
+<div  style="width:1700px;" class = "chart" >
+  <canvas baseChart
+
+          [datasets]="barChartDataLeagueTo"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>
+</div>
+</body>
+

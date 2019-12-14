@@ -4,8 +4,8 @@ import { TransferServiceService } from '../transfer-service.service';
 import { TransferRecord } from '../transferRecord';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label, SingleDataSet } from 'ng2-charts';
-import regression from 'regression';
-import * as Highcharts from 'highcharts';
+
+
 import {first} from "rxjs/operators";
 
 
@@ -28,49 +28,10 @@ export interface Regression {
 })
 export class TotalComponent implements OnInit {
 
-  //new Charts module
-
 
   sortPlayers;
   topPlayers: TransferRecord[] = [];
-  regressionArray: Regression[] = [{x: 1, y:2}, {x: 3, y : 7}];
-  highcharts = Highcharts;
 
-  chartOptions = {
-    title : {
-      text: 'Scatter plot with regression line'
-    },
-    xAxis : {
-      min: -0.5,
-      max: 5.5
-    },
-    yAxis : {
-      min: 0
-    },
-    series : [
-      {
-        type: 'line',
-        name: 'Regression Line',
-        data: [[0, 1.11], [5, 4.51]],
-        marker: {
-          enabled: false
-        },
-        states: {
-          hover: {
-            lineWidth: 0
-          }
-        },
-        enableMouseTracking: false
-      },
-      {
-        type: 'scatter',
-        name: 'Observations',
-        data: [1, 1.5, 2.8, 3.5, 3.9, 4.2],
-        marker: {
-          radius: 4
-        }
-      }]
-  };
 
 
 
@@ -160,20 +121,8 @@ export class TotalComponent implements OnInit {
 
 
   constructor(public http: HttpClient, public transferService: TransferServiceService) {
-    var data = [[27,60000000],[25,56810000]];
 
 
-  for(var i = 2; i < this.transferService.sortedData.length; i++)
-  {
-
-    data.push([this.transferService.sortedData[i].Age, this.transferService.sortedData[i].Transfer_fee])
-  }
-
-
-
-
-    const result = regression.linear(data);
-    console.log(result);
 
     this.sortPlayers = this.transferService.sortedData.sort((a, b) => (a.Transfer_fee < b.Transfer_fee) ? 1 : -1);
 
