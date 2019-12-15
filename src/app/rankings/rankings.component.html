@@ -8,9 +8,15 @@
   style="width: 1920px; height: 800px; display: block;"
 ></highcharts-chart>
 
+<div>
+  <p style="font-size:40px">
+    Pearson correlation coefficient: {{ageFeeCorrelation}}
+  </p>
+</div>
 
-<p>
-  Average prices of players on individual positions
+
+<p >
+  The sum of transfers of players of particular age
 </p>
 
 
@@ -29,7 +35,7 @@
 <div style="padding-top:360px;">
 
   <p>
-    Sum prices of players age
+    The sum of transfers from individual leagues
   </p>
 
   <div  style="height:600px;width:1700px;" class = "chart" >
@@ -45,7 +51,7 @@
 </div>
 <div style="padding-top:360px;">
 <p>
-  Average prices of players on individual positions
+  The sum of transfers to individual leagues
 </p>
 
 
@@ -60,5 +66,26 @@
   </canvas>
 </div>
 </div>
+<div>
+  <p style="font-size:40px">
+    Pearson correlation coefficient for market value and transfer fee: {{feeMarketValueCorrelation}}
+  </p>
+</div>
+<div>
+  <p style="font-size:40px">
+    Pearson correlation coefficient for season and transfer fee: {{seasonCorrelation}}
+  </p>
+</div>
+
+<div>
+  <p style="font-size:40px">
+    Pearson correlation coefficient for position value and transfer fee: {{positionCorrelation}}
+  </p>
+</div>
+
+
+
+
+
 </body>
 

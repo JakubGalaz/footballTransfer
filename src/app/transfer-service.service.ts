@@ -10,6 +10,7 @@ export class TransferServiceService {
 
   MyList;
   sortedData: TransferRecord[];
+  newData: TransferRecord[];
 
   constructor(public http: HttpClient) {
 
@@ -19,6 +20,17 @@ export class TransferServiceService {
 
 
     });
+
+    this.getCorrelationList().subscribe(post => {
+      this.newData = post.slice();
+
+
+
+    });
+
+
+
+
   }
 
 
@@ -26,5 +38,11 @@ export class TransferServiceService {
     // tslint:disable-next-line:max-line-length
     return this.http.get<Array<TransferRecord>>('../assets/transfers.json');
     }
+
+
+  getCorrelationList(): Observable<Array<TransferRecord>> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<Array<TransferRecord>>('../assets/newData.json');
+  }
 
 }

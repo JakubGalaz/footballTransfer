@@ -33,7 +33,14 @@ export class RankingsComponent implements OnInit {
   playersAgePrice: number[][] = [[0,0]];
   //new Charts module
   Highcharts: typeof Highcharts = Highcharts;
-
+  sortedAge: number[] = [];
+  sortedPrice: number[] = [];
+  sortedMarketValue: number[] = [];
+  sortedPriceShort: number[] = [];
+  feeMarketValueCorrelation;
+  ageFeeCorrelation;
+  seasonCorrelation;
+  positionCorrelation;
 
   regressionArray: Regression[] = [{x: 1, y:2}, {x: 3, y : 7}];
 
@@ -170,8 +177,40 @@ export class RankingsComponent implements OnInit {
 
 
     this.sortPlayers = this.transferService.sortedData.sort((a, b) => (a.Age > b.Age) ? 1: -1);
+  //  var tmpAge = this.transferService.sortedData.sort((a, b) => (a.Age > b.Age) ? 1: -1);
+   // var tmpPrice = this.transferService.sortedData.sort((a, b) => (a.Transfer_fee > b.Transfer_fee) ? 1: -1);
+    var seasonArray: number[] = [];
+    var positionsArray: number[] = [];
 
 
+    for(let i =0; i < this.transferService.sortedData.length; i++){
+      this.sortedAge.push(this.transferService.sortedData[i].Age);
+      this.sortedPrice.push(this.transferService.sortedData[i].Transfer_fee);
+      seasonArray.push(this.transferService.newData[i].Season);
+      positionsArray.push(this.transferService.newData[i].Position);
+
+
+
+    }
+
+    for(let i =0; i < this.transferService.sortedData.length; i++){
+      if(this.transferService.sortedData[i].Market_value !== 'NA'){
+        this.sortedPriceShort.push(this.transferService.sortedData[i].Transfer_fee)
+        this.sortedMarketValue.push(this.transferService.sortedData[i].Market_value)
+      }
+
+
+
+    }
+
+
+    this.feeMarketValueCorrelation = getPearsonCorrelation( this.sortedPriceShort, this.sortedMarketValue);
+    this.ageFeeCorrelation = getPearsonCorrelation(this.sortedPrice, this.sortedAge);
+    this.positionCorrelation = getPearsonCorrelation(positionsArray, this.sortedPrice);
+    this.seasonCorrelation = getPearsonCorrelation(seasonArray, this.sortedPrice);
+
+    console.log('Pozycje i cena: ' + this.positionCorrelation);
+    console.log('sezony i cena: ' + this.seasonCorrelation);
 
 
 
@@ -183,7 +222,7 @@ export class RankingsComponent implements OnInit {
 
 
 
-    console.log(this.playersAgePrice)
+
 
 
 
@@ -236,12 +275,12 @@ export class RankingsComponent implements OnInit {
       data.push([this.transferService.sortedData[i].Age, this.transferService.sortedData[i].Transfer_fee])
     }
 
-    //this.chartOptions.series.push()
+
 
 
 
     const result = regression.linear(data);
-  //  console.log(this.sortPlayers);
+
 
   }
 
@@ -302,4 +341,52 @@ export class RankingsComponent implements OnInit {
   public chartHovered(e: any): void { }
 
 
+}
+
+
+
+function getPearsonCorrelation(x, y) {
+  var shortestArrayLength = 0;
+
+  if (x.length == y.length) {
+    shortestArrayLength = x.length;
+  } else if (x.length > y.length) {
+    shortestArrayLength = y.length;
+    console.log('x has more items in it, the last ' + (x.length - shortestArrayLength) + ' item(s) will be ignored');
+  } else {
+    shortestArrayLength = x.length;
+    console.log('y has more items in it, the last ' + (y.length - shortestArrayLength) + ' item(s) will be ignored');
+  }
+
+  var xy = [];
+  var x2 = [];
+  var y2 = [];
+
+  for (var i = 0; i < shortestArrayLength; i++) {
+    xy.push(x[i] * y[i]);
+    x2.push(x[i] * x[i]);
+    y2.push(y[i] * y[i]);
+  }
+
+  var sum_x = 0;
+  var sum_y = 0;
+  var sum_xy = 0;
+  var sum_x2 = 0;
+  var sum_y2 = 0;
+
+  for (var i = 0; i < shortestArrayLength; i++) {
+    sum_x += x[i];
+    sum_y += y[i];
+    sum_xy += xy[i];
+    sum_x2 += x2[i];
+    sum_y2 += y2[i];
+  }
+
+  var step1 = (shortestArrayLength * sum_xy) - (sum_x * sum_y);
+  var step2 = (shortestArrayLength * sum_x2) - (sum_x * sum_x);
+  var step3 = (shortestArrayLength * sum_y2) - (sum_y * sum_y);
+  var step4 = Math.sqrt(step2 * step3);
+  var answer = step1 / step4;
+
+  return answer;
 }
