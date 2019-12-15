@@ -1,15 +1,15 @@
-p{
-  color: white;
+.barChart{
+  background-color: whitesmoke;
+  width:75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
 }
 
 body{
 background-repeat:repeat-y;
 }
 
-th{
-  color: white;
-}
-
-tr{
-  color: white;
-}

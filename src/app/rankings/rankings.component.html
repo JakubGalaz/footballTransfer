@@ -1,26 +1,26 @@
 
 <body>
 
+
+<div  style="align-content: center">
 <highcharts-chart
   [Highcharts]="Highcharts"
   [options]="chartOptions"
 
-  style="width: 1920px; height: 800px; display: block;"
+  style="width: 75%; display: block;  margin-left: auto;
+  margin-right: auto;"
 ></highcharts-chart>
-
-<div>
-  <p style="font-size:40px">
-    Pearson correlation coefficient: {{ageFeeCorrelation}}
-  </p>
-</div>
+  </div>
 
 
+
+<div class="barChart">
 <p >
   The sum of transfers of players of particular age
 </p>
 
 
-<div  style="height:600px;width:1700px;" class = "chart" >
+<div   class = "chart" >
   <canvas baseChart
 
           [datasets]="barChartData"
@@ -30,15 +30,16 @@
           [chartType]="barChartType">
   </canvas>
 </div>
+</div>
 
 
-<div style="padding-top:360px;">
+<div class="barChart">
 
   <p>
     The sum of transfers from individual leagues
   </p>
 
-  <div  style="height:600px;width:1700px;" class = "chart" >
+  <div  >
   <canvas baseChart
 
           [datasets]="barChartDataLeagueFrom"
@@ -49,13 +50,15 @@
   </canvas>
 </div>
 </div>
-<div style="padding-top:360px;">
+
+
+<div class="barChart">
 <p>
   The sum of transfers to individual leagues
 </p>
 
 
-<div  style="width:1700px;" class = "chart" >
+<div class = "chart" >
   <canvas baseChart
 
           [datasets]="barChartDataLeagueTo"
@@ -66,23 +69,49 @@
   </canvas>
 </div>
 </div>
-<div>
-  <p style="font-size:40px">
-    Pearson correlation coefficient for market value and transfer fee: {{feeMarketValueCorrelation}}
-  </p>
-</div>
-<div>
-  <p style="font-size:40px">
-    Pearson correlation coefficient for season and transfer fee: {{seasonCorrelation}}
-  </p>
-</div>
 
-<div>
-  <p style="font-size:40px">
-    Pearson correlation coefficient for position value and transfer fee: {{positionCorrelation}}
-  </p>
-</div>
+<p></p>
 
+
+<div class="barChart">
+  <table  cellspacing="30"  class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First attribute</th>
+      <th scope="col">Second attribute</th>
+      <th scope="col">Pearson correlation coefficient</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Transfer fee</td>
+      <td>Market value</td>
+      <td>{{feeMarketValueCorrelation}}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Transfer fee</td>
+      <td>Age</td>
+      <td>{{ageFeeCorrelation}}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Transfer fee</td>
+      <td>Season</td>
+      <td>{{seasonCorrelation}}</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Transfer fee</td>
+      <td>Position</td>
+      <td>{{positionCorrelation}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
 
 
 

@@ -1,6 +1,6 @@
 <body>
 
-<div  >
+<div >
 <mat-form-field   >
   <mat-label>Select league</mat-label>
   <mat-select  [(ngModel)]="selected2">
@@ -15,14 +15,14 @@
 
 
 
-
-
+<div class="barChart">
+<div>
 <p>
     Average prices of players on individual positions
 </p>
 
 
-    <div  style="height:550px;width:1800px;" class = "chart" >
+    <div  >
       <canvas baseChart #baseChart="base-chart"
 
               [datasets]="barChartData"
@@ -33,14 +33,16 @@
       </canvas>
     </div>
 
+</div>
+</div>
 
-<div style="padding-top:440px;">
+<div class="barChart">
   <p>
     Total positions
   </p>
   <div>
     <div>
-      <div style="display: block">
+      <div >
         <canvas baseChart #polarChart="base-chart"
                 [data]="polarAreaChartData"
                 [labels]="polarAreaChartLabels"
@@ -54,12 +56,12 @@
 
 
 
-<div >
+<div class="barChart">
 
   <p>
     Average prices of players over the years
   </p>
-  <div class="flex-item" style="height:370px;width:1900px;" >
+  <div class="flex-item" >
     <div style="display: block;">
       <canvas baseChart #baseChart="base-chart"
               [datasets]="lineChartData"
@@ -76,14 +78,14 @@
 </div>
 
 
-<div style="padding-top:740px;">
+<div class=barChart>
   <p>
     The most expensive transfers
   </p>
 
 
 
-  <table class="table"  >
+  <table class="table"  cellspacing="10"  >
     <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>

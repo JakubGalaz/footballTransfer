@@ -1,11 +1,10 @@
-p{
-  color: white;
-}
-
-td{
-  color: white;
-}
-
-th{
-  color: white;
+.barChart{
+  background-color: whitesmoke;
+  width:75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
 }
