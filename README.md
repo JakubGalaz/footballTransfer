@@ -2,7 +2,7 @@
 * [FootballTransfers](#footballtransfers)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Control-flow diagram](#cntrol-flow-diagram)
+* [Control-flow diagram](#control-flow-diagram)
 * [Features](#features)
 * [Sources](#sources)
 
@@ -28,6 +28,7 @@ The theme of the project is to present statistics on the largest football transf
 The node.js runtime environment is required to run the application. After installing it, run the command line and then go to the main directory of the project. In the console, enter the command ng serve which will start our application. The next step is to open any web browser and enter the address of the local host: localhost: 4200. The application start page will load in your browser.
 
 ## Control-flow diagram
+![Control-flow diagram](./image/przeplyw.png)
 
 
 
@@ -40,8 +41,31 @@ There are three tabs in the application:
 All charts in the application are interactive, hovering over them with the mouse displays detailed data, and clicking on the label omits a specific attribute in the data visualization on the chart.
 
 Main page: 
+![Main Page](./image/mainPage.png)
+
 
 Carts and dependencies on the site:
+
+
+![1](./image/1.png)
+
+![2](./image/2.png)
+
+![3](./image/3.png)
+
+![4](./image/4.png)
+
+![5](./image/5.png)
+
+![6](./image/6.png)
+
+![7](./image/7.png)
+
+![8](./image/8.png)
+
+![9](./image/9.png)
+
+![10](./image/10.png)
 
 
 There are other charts in the application. They relate to individual leagues.
